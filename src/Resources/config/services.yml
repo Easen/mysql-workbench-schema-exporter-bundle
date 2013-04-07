@@ -1,0 +1,11 @@
+parameters:
+    mysql_workbench_schema_exporter.exporter.class: MysqlWorkbenchSchemaExporterBundle\Service\Exporter
+    mysql_workbench_schema_exporter.exporter.schemas: []
+
+services:
+    mysql_workbench_schema_exporter.exporter:
+        class: %mysql_workbench_schema_exporter.exporter.class%
+        arguments: [%mysql_workbench_schema_exporter.exporter.schemas%]
+        calls:
+          - [setContainer, [@service_container]]
+

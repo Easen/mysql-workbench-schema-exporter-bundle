@@ -1,0 +1,25 @@
+{
+    "name": "mysql-workbench-schema-exporter/symfony2-bundle",
+    "type": "cli",
+    "description": "MySQL Workbench Schema Exporter bundle for Symfony 2.2+",
+    "keywords": ["mysql","workbench","database","doctrine","cli"],
+    "homepage": "https://github.com/easen/mysql-workbench-schema-exporter-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Easen",
+            "email": "marc@easen.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "symfony/symfony": "2.2.*",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "mysql-workbench-schema-exporter/mysql-workbench-schema-exporter": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "MysqlWorkbenchSchemaExporterBundle\Command\\": "src/" }
+    }
+}
