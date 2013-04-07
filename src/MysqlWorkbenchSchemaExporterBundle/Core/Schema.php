@@ -140,7 +140,7 @@ class Schema extends ContainerAware
      *
      * @return string
      */
-    protected function getBundleDir()
+    public function getBundleDir()
     {
         return dirname($this->getBundleReflectionClass()->getFileName());
     }

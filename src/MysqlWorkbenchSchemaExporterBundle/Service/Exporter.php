@@ -76,18 +76,37 @@ class Exporter extends ContainerAware {
             $output->writeln(sprintf('Exporting "<info>%s</info>" schema', $schema->getName()));
             $location = $schema->export();
             $output->writeln(sprintf('Saved to "<info>%s</info>".', $location));
-            $bundles[] = $schema->getOption('bundle');
+            $bundles[] = array(
+                'name' => $schema->getOption('bundle'),
+                'path' => $schema->getBundleDir()
+            );
         }
 
         // Use the Symfony generate doctrine entities
-        $bundles = array_unique($bundles);
         foreach($bundles as $bundle) {
             $kernel = $this->container->get('kernel');
             $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
             $application->setAutoExit(false);
+            $application->setCatchExceptions(false);
 
-            $options = array('command' => 'generate:doctrine:entities', 'name' => $bundle, '--no-backup' => true);
-            $application->run(new \Symfony\Component\Console\Input\ArrayInput($options), $output);
+            $options = array(
+                'command' => 'generate:doctrine:entities',
+                'name' => $bundle['name'],
+                '--path' => $bundle['path'],
+                '--no-backup' => true
+            );
+
+            try {
+                $application->run(new \Symfony\Component\Console\Input\ArrayInput($options), $output);
+            } catch (\Exception $ex) {
+                $output->writeln('There were errors while running <info>generate:doctrine:entities</info>');
+                $output->writeln(sprintf(
+                    'Please run <info>app/console generate:doctrine:entities --path %s --no-backup %s</info>',
+                     $bundle['name'],
+                     $bundle['path']
+                ));
+            }
+
         }
 
     }
