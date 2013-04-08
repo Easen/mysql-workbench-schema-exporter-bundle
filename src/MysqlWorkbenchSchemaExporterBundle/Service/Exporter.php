@@ -78,7 +78,7 @@ class Exporter extends ContainerAware {
             $output->writeln(sprintf('Saved to "<info>%s</info>".', $location));
             $bundles[] = array(
                 'name' => $schema->getOption('bundle'),
-                'path' => $schema->getBundleDir()
+                'path' => $schema->getBundle()->getPath()
             );
         }
 

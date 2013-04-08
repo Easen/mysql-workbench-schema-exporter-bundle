@@ -29,9 +29,9 @@ class Schema extends ContainerAware
     /**
      * Bundle reflection class
      *
-     * @var ReflectionClass
+     * @var \Symfony\Component\HttpKernel\Bundle\Bundle
      */
-    protected $bundleReflectionClass = null;
+    protected $bundle = null;
 
     /**
      * Default formater params
@@ -109,7 +109,7 @@ class Schema extends ContainerAware
      */
     protected function getMwbFile()
     {
-        $file = $this->getBundleDir() . DIRECTORY_SEPARATOR . sprintf($this->getOption('file'), $this->getName());
+        $file = $this->getBundle()->getPath() . DIRECTORY_SEPARATOR . sprintf($this->getOption('file'), $this->getName());
 
         if (!file_exists($file)) {
             throw new \RuntimeException(sprintf('Unable to locate the MySQL Workbench File %s', $file));
@@ -121,28 +121,16 @@ class Schema extends ContainerAware
     /**
      * Get the bundle reflection class
      *
-     * @return \ReflectionClass
+     * @return \Symfony\Component\HttpKernel\Bundle\Bundle
      */
-    protected function getBundleReflectionClass()
+    public function getBundle()
     {
-        if (null === $this->bundleReflectionClass) {
+        if (null === $this->bundle) {
             $bundle = $this->getOption('bundle');
             $kernel = $this->container->get('kernel');
-            $bundleInstance = $kernel->getBundle($bundle);
-
-            $this->bundleReflectionClass = new \ReflectionClass($bundleInstance);
+            $this->bundle = $kernel->getBundle($bundle);
         }
-        return $this->bundleReflectionClass;
-    }
-
-    /**
-     * Get the bundle directory
-     *
-     * @return string
-     */
-    public function getBundleDir()
-    {
-        return dirname($this->getBundleReflectionClass()->getFileName());
+        return $this->bundle;
     }
 
     /**
@@ -152,7 +140,7 @@ class Schema extends ContainerAware
      */
     protected function getOutputDir()
     {
-        return $this->getBundleDir() .
+        return $this->getBundle()->getPath() .
                DIRECTORY_SEPARATOR .
                sprintf(
                     $this->getOption('output', 'Entity/%s/'),
@@ -170,7 +158,7 @@ class Schema extends ContainerAware
         $params = array_merge(
             $this->defaultFormatterParams,
             array(
-                'bundleNamespace' => $this->getBundleReflectionClass()->getNamespaceName()
+                'bundleNamespace' => $this->getBundle()->getNamespace()
             ),
             $this->getOption('params', array())
         );
