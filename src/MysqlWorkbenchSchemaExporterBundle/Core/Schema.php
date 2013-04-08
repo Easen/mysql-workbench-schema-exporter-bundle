@@ -142,10 +142,8 @@ class Schema extends ContainerAware
     {
         return $this->getBundle()->getPath() .
                DIRECTORY_SEPARATOR .
-               sprintf(
-                    $this->getOption('output', 'Entity/%s/'),
-                    ucfirst($this->getName())
-               );
+               $this->getOption('output', 'Entity/');
+
     }
 
     /**

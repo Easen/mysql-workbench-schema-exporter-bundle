@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
                     ->arrayNode('params')
                     ->end()
                     ->scalarNode('output')
-                        ->defaultValue('Entity/%s/')
+                        ->defaultValue('Entity/')
                     ->end()
                     ->scalarNode('file')
                         ->defaultValue('Resources/workbench/%s.mwb')
