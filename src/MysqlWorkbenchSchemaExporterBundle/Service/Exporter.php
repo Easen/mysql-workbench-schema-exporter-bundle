@@ -102,8 +102,8 @@ class Exporter extends ContainerAware {
                 $output->writeln('There were errors while running <info>generate:doctrine:entities</info>');
                 $output->writeln(sprintf(
                     'Please run <info>app/console generate:doctrine:entities --path %s --no-backup %s</info>',
-                     $bundle['name'],
-                     $bundle['path']
+                     $bundle['path'],
+                     $bundle['name']
                 ));
             }
 
