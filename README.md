@@ -5,7 +5,7 @@ README
 Setup
 -----
 
-Workbench files should be saved in the resources/workbench/*.mwb directory. This is configurable per schema.
+Workbench files should be saved in the Resources/workbench/*.mwb directory inner the bundle that is in the configuration. This is configurable per schema.
 
 
 Configuration
@@ -35,4 +35,11 @@ Multiple schemas
                 bundle: YourBundle
             schema3_name:
                 bundle: YourBundle
+
+Execution
+=========
+
+To process the files execute the command in the terminal:
+
+	app/console mysqlworkbenchschemaexporter:dump
 
