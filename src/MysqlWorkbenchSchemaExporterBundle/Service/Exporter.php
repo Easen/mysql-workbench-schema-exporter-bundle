@@ -98,6 +98,9 @@ class Exporter extends ContainerAware {
 
             try {
                 $application->run(new \Symfony\Component\Console\Input\ArrayInput($options), $output);
+
+                // Bug where the new entities are created but the repository classes aren't generated
+                $application->run(new \Symfony\Component\Console\Input\ArrayInput($options), $output);
             } catch (\Exception $ex) {
                 $output->writeln('There were errors while running <info>generate:doctrine:entities</info>');
                 $output->writeln(sprintf(
