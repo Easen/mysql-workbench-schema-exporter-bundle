@@ -35,6 +35,19 @@ Multiple schemas
                 bundle: YourBundle
             schema3_name:
                 bundle: YourBundle
+                params:
+                    repositoryNamespace: "Acme\\SomeBundle\\Entity\\Repository"
+                    backupExistingFile: true,
+                    skipPluralNameChecking: false,
+                    enhanceManyToManyDetection: true,
+                    bundleNamespace: "",
+                    entityNamespace: "",
+                    repositoryNamespace: "",
+                    useAnnotationPrefix: "ORM\\",
+                    useAutomaticRepository: true,
+                    indentation: 4,
+                    filename: "%entity%.%extension%",
+                    quoteIdentifier: false
 
 Execution
 =========
