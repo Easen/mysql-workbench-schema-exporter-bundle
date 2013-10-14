@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/symfony": ">2.2*",
+        "symfony/symfony": ">=2.2*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "mysql-workbench-schema-exporter/mysql-workbench-schema-exporter": "dev-master"
